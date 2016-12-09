@@ -50,6 +50,11 @@ app.post('/webhook/', function (req, res) {
         } else {
           console.log("Webhook received unknown event: ", event);
         }
+
+        if (event.postback) {
+          let text = JSON.stringify(event.postback)
+          sendTextMessage(sender, "Postback received: "+text.substring(0, 200), TOKEN)
+        }
       });
     });
 
